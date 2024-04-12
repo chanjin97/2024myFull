@@ -132,7 +132,7 @@ function RegisterPage() {
               type="text"
               id="name"
               className="border w-full rounded-md p-2 text-xs"
-              placeholder="이름을 입력해주세요."
+              placeholder="이름을 입력하세요"
               {...register("name", userName)}
             />
             {errors.name && (
@@ -155,7 +155,7 @@ function RegisterPage() {
               placeholder="비밀번호를 입력해주세요."
               {...register("password", userPassword)}
             />
-            {errors.name && (
+            {errors.password && (
               <div className="text-red-500 text-xs mt-1">
                 {errors.password.message}
               </div>
