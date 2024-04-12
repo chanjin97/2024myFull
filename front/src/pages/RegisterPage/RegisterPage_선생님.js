@@ -1,38 +1,56 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import axios from "axios";
 
-function RegisterPage_선생님() {
+function RegisterPage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
     watch,
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
   //   const onSubmit = data => console.log(data);
 
-  function onSubmit({ email, name, password }) {
+  async function onSubmit({ email, name, password }) {
     const body = {
       email,
       name,
       password,
     };
+    try {
+      const response = await axios.post("/user/register", body);
 
+      console.log("회원가입성공", response.data);
+
+      toast("👨👩 회원가입을 성공하였습니다.", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error) {
+      console.error("요청실패 :", error);
+
+      toast("🤷‍♂️🤷‍♂️🤷‍♂️ 회원가입을 실패!!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
     console.log(body);
     // toast.info("회원가입을 성공하였습니다.");
-
-    toast("👨👩 회원가입을 성공하였습니다.", {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
 
     reset();
   }
@@ -170,4 +188,4 @@ function RegisterPage_선생님() {
   );
 }
 
-export default RegisterPage_선생님;
+export default RegisterPage;
