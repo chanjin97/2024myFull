@@ -16,15 +16,13 @@ root.render(
         <App />
       </PersistGate>
     </Provider>
-
     <ToastContainer
       position="bottom-right"
       autoClose={5000}
       closeOnClick
       pauseOnFocusLoss
       pauseOnHover
-      theme="dark"
-      // transition="Zoom"
+      theme="light"
     />
   </BrowserRouter>
 );

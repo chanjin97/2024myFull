@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../store/thunkFunctions";
 
 function LoginPage() {
   const {
@@ -7,12 +9,19 @@ function LoginPage() {
     handleSubmit,
     formState: { errors } /* 오류를 뽑아내는친구 */,
     reset /* 비워내주는친구? 입력창을? */,
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
   // const onSubmit = data => console.log(data);
 
-  function onSubmit(data) {
-    console.log(data);
+  const dispatch = useDispatch();
+  async function onSubmit({ email, password }) {
+    const body = {
+      email,
+      password,
+    };
+
+    dispatch(loginUser(body));
+    reset();
   }
 
   const userEmail = {
@@ -29,17 +38,7 @@ function LoginPage() {
       message: "최소 6글자입니다.",
     },
   };
-  const userName = {
-    required: {
-      value: true,
-      message: "이름은 필수 입니다.",
-    },
 
-    minLength: {
-      value: 2,
-      message: "최소 2글자 입니다.",
-    },
-  };
   const userPassword = {
     required: {
       value: true,
