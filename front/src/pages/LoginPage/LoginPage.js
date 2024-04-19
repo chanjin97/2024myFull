@@ -19,7 +19,7 @@ function LoginPage() {
       email,
       password,
     };
-
+    /* 내보내다 */
     dispatch(loginUser(body));
     reset();
   }
@@ -101,7 +101,7 @@ function LoginPage() {
 
           <div className="mb-4">
             <button className="w-full bg-gray-800 rounded-md text-white py-2 hover:bg-gray-500 transition">
-              회원가입
+              로그인
             </button>
           </div>
           <div className="text-center text-xs">

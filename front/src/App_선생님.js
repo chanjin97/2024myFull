@@ -33,7 +33,6 @@ function App() {
       dispatch(authUser());
     }
   }, [isAuth, dispatch, pathname]);
-
   // const isAuth = useSelector((state) => {return state.user.isAuth});
   return (
     <>
