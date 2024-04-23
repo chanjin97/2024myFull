@@ -38,8 +38,19 @@ blogRouter.post("/", async (req, res) => {
 
 blogRouter.get("/", async (req, res) => {
   try {
-    const blogs = await Blog.find({});
-    return res.status(200).send({ blogs });
+    let { page } = req.query;
+    page = parseInt(page);
+    const totalCnt = await Blog.countDocuments({});
+    const blogs = await Blog.find({})
+      .skip(page * 5) /* skip은 몇번째에서 몇번째까지 볼것이냐 */
+      .limit(5) /* limit은 갯수 */
+      .populate({
+        path: "user",
+        select: "email name",
+      }); /* populate는 내가 정한, 원하는 정보만을 가져올수가 있음 */
+    return res
+      .status(200)
+      .send({ blogs, totalCnt }); /* ({blogs:blogs , totalCnt:totalCnt}) */
   } catch (error) {
     console.log(error);
     res.status(500).send({ error: error.message });

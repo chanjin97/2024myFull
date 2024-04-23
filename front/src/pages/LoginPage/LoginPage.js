@@ -5,10 +5,10 @@ import { loginUser } from "../../store/thunkFunctions";
 
 function LoginPage() {
   const {
-    register /* 입력할때 쓰는것 */,
+    register, // 입력할때 쓰는것
     handleSubmit,
-    formState: { errors } /* 오류를 뽑아내는친구 */,
-    reset /* 비워내주는친구? 입력창을? */,
+    formState: { errors }, // 오류를 뽑아내는친구
+    reset, // 비워내주는친구? 입력창을?
   } = useForm({ mode: "onChange" });
 
   // const onSubmit = data => console.log(data);
@@ -19,6 +19,7 @@ function LoginPage() {
       email,
       password,
     };
+
     /* 내보내다 */
     dispatch(loginUser(body));
     reset();
